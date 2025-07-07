@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/lista-compras/static/css/main.e6c13ad2.css",
+    "main.js": "/lista-compras/static/js/main.16224a08.js",
+    "static/js/453.fd6260f1.chunk.js": "/lista-compras/static/js/453.fd6260f1.chunk.js",
+    "index.html": "/lista-compras/index.html",
+    "main.e6c13ad2.css.map": "/lista-compras/static/css/main.e6c13ad2.css.map",
+    "main.16224a08.js.map": "/lista-compras/static/js/main.16224a08.js.map",
+    "453.fd6260f1.chunk.js.map": "/lista-compras/static/js/453.fd6260f1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.16224a08.js"
+  ]
+}
