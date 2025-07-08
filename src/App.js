@@ -9,7 +9,7 @@ import {
   updateDoc 
 } from 'firebase/firestore';
 
-// Función para formatear la fecha (¡NUEVO!)
+// Función para formatear la fecha
 const formatDate = (timestamp) => {
   if (!timestamp?.seconds) return "Sin fecha";
   const date = new Date(timestamp.seconds * 1000);
@@ -109,7 +109,7 @@ function App() {
                   color: 'red' 
                 }}
               >
-                🗑️
+                🗑️ Eliminar
               </button>
             </div>
           </li>
