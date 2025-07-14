@@ -8,7 +8,7 @@ import {
   doc, 
   updateDoc 
 } from 'firebase/firestore';
-import '/App.css';
+import './App.css';
 
 const formatDate = (timestamp) => {
   if (!timestamp?.seconds) return "Sin fecha";
