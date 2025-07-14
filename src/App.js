@@ -8,8 +8,8 @@ import {
   doc, 
   updateDoc 
 } from 'firebase/firestore';
+import './App.css';
 
-// Función para formatear la fecha
 const formatDate = (timestamp) => {
   if (!timestamp?.seconds) return "Sin fecha";
   const date = new Date(timestamp.seconds * 1000);
@@ -24,8 +24,8 @@ const formatDate = (timestamp) => {
 function App() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
+  const [error, setError] = useState(''); // <-- Le agregué validación de error
 
-  // Carga y ordena items por fecha
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'items'), (snapshot) => {
       const itemsData = snapshot.docs.map(doc => ({
@@ -37,41 +37,53 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // Añadir item con timestamp
   const addItem = async () => {
-    if (newItem.trim() !== '') {
-      await addDoc(collection(db, 'items'), {
-        text: newItem,
-        completed: false,
-        timestamp: new Date() // Guarda fecha actual
-      });
-      setNewItem('');
+    if (newItem.trim() === '') {
+      setError('⚠️ Por favor ingresa un producto');
+      setTimeout(() => setError(''), 3000); // Elimina el error después de 3 segundos
+      return;
     }
+
+    await addDoc(collection(db, 'items'), {
+      text: newItem,
+      completed: false,
+      timestamp: new Date() // <-- Agregué timestamp para ordenar por fecha
+    });
+
+    setNewItem('');
+    setError('');
   };
 
-  // Eliminar item
   const deleteItem = async (id) => {
     await deleteDoc(doc(db, 'items', id));
   };
 
-  // Marcar como completado
   const toggleComplete = async (id, currentStatus) => {
     await updateDoc(doc(db, 'items', id), {
-      completed: !currentStatus
+      completed: !currentStatus // Cambia el estado de completado a lo contrario
     });
   };
 
   return (
     <div className="App">
       <h1>Lista de Compras 🛒</h1>
-      
-      <input 
-        type="text" 
-        value={newItem} 
-        onChange={(e) => setNewItem(e.target.value)} 
-        placeholder="Leche, pan..."
-      />
-      <button onClick={addItem}>Añadir</button>
+
+      <form className="input-group" onSubmit={(e) => {
+        e.preventDefault(); // Evita recarga
+        addItem();
+      }}>
+        <input 
+          type="text" 
+          value={newItem} 
+          onChange={(e) => setNewItem(e.target.value)} //
+          placeholder="Leche, pan..."
+          className={error ? 'error' : ''}
+        />
+        <button type="submit">Añadir</button>
+      </form>
+
+
+      {error && <p className="error-message">{error}</p>}
 
       <ul>
         {items.map((item) => (
@@ -84,30 +96,16 @@ function App() {
           >
             <div>
               <span>{item.text}</span>
-              <small style={{ color: "gray", marginLeft: "10px" }}>
-                {formatDate(item.timestamp)} {/* Fecha formateada aquí */}
-              </small>
+              <small>{formatDate(item.timestamp)}</small>
             </div>
             <div>
               <button 
                 onClick={() => toggleComplete(item.id, item.completed)}
-                style={{ 
-                  background: 'none', 
-                  border: 'none', 
-                  cursor: 'pointer',
-                  marginRight: '8px'
-                }}
               >
-                {item.completed ? "✅" : "⬜"}
+                {item.completed ? "✅ Completado " : "⬜ Completar"}
               </button>
               <button 
                 onClick={() => deleteItem(item.id)}
-                style={{ 
-                  background: 'none', 
-                  border: 'none', 
-                  cursor: 'pointer', 
-                  color: 'red' 
-                }}
               >
                 🗑️ Eliminar
               </button>

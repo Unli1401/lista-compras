@@ -1,32 +1,152 @@
-/* Estilos generales para móviles */
+/* Estilo general del body */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px 10px;
+  
+}
+
+/* Contenedor principal de la app */
 .App {
-  max-width: 100%;
-  padding: 10px;
-}
-
-input, button {
-  font-size: 16px;
-  padding: 8px;
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  /*box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);*/
+  box-shadow: 35px 34px 16px -7px rgba(148,122,122,0.84);
+  max-width: 480px;
   width: 100%;
-  margin: 5px 0;
+  box-sizing: border-box;
 }
 
-button {
-  background: #007bff;
+/* Título */
+.App h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  /*text-shadow: 4px 4px 7px rgba(0,0,0,0.6);*/
+  
+}
+
+/* Grupo de input y botón */
+.input-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+/* Input de texto */
+.input-group input {
+  flex: 1;
+  min-width: 180px;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* Botón de añadir */
+.input-group button {
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+  box-shadow: 10px 10px 5px 0px rgba(10, 16, 43, 0.75);
 }
 
+.input-group button:hover {
+  background-color: #023061;
+}
+
+/* Lista de ítems */
 ul {
   padding-left: 0;
   list-style: none;
+  margin-top: 20px;
+  
 }
 
+/* Cada ítem */
 li {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* Contenido del ítem (texto + fecha) */
+li > div:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+}
+
+li span {
+  overflow-wrap: break-word;
+}
+
+/* Fecha */
+li small {
+  font-size: 12px;
+  color: #6b7280;
+  margin-left: 10px;
+}
+
+/* Acciones (botones) */
+li > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botones individuales */
+li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+li button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+li button:last-child {
+  color: red;
+}
+
+/* Responsive para pantallas medianas o grandes */
+@media (min-width: 768px) {
+  .App {
+    padding: 30px 40px;
+  }
+
+  .input-group {
+    flex-wrap: nowrap;
+  }
+
+  .input-group button {
+    font-size: 18px;
+    padding: 10px 18px;
+  }
 }
