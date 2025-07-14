@@ -87,15 +87,14 @@ function App() {
 
       <ul>
         {items.map((item) => (
-          <li 
-            key={item.id} 
-            style={{ 
-              textDecoration: item.completed ? "line-through" : "none",
-              opacity: item.completed ? 0.7 : 1
-            }}
-          >
+          <li key={item.id}>
+            
             <div>
-              <span>{item.text}</span>
+              <span
+                style = {{
+                  textDecoration: item.completed ? "line-through" : "none",
+                  opacity: item.completed ? 0.7 : 1
+                }}>{item.text}</span>
               <small>{formatDate(item.timestamp)}</small>
             </div>
             <div>
